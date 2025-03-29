@@ -1,8 +1,7 @@
 <?php 
 
 require ('functions/databaseFunctions.php');
-require ('functions/genericFunctions.php');
-require ('functions/userFunctions.php');
+startsession()
 
 
 
@@ -19,7 +18,7 @@ require ('functions/userFunctions.php');
 <body>
     <div class="container mt-5">
         <h2>Εγγραφή</h2>
-        <form action="server/userRegister.php" method="POST">
+        <form action="server/userRegisterServer.php" method="POST">
             <div class="mb-3">
                 <label class="form-label">Όνομα Χρήστη</label>
                 <input type="text" name="username" class="form-control" placeholder="Όνομα Χρήστη" required>
@@ -30,12 +29,12 @@ require ('functions/userFunctions.php');
             </div>
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" placeholder ="Email" >
+                <input type="email" name="email" class="form-control" placeholder ="Email" requaired>
             </div>
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label class="form-label">Role</label>
                 <input type="text" name="role" class="form-control" placeholder ="Role">
-            </div>
+            </div> -->
             <button type="submit" name="register" class="btn btn-primary">Εγγραφή</button>
         </form>
     </div>
