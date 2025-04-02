@@ -1,7 +1,8 @@
 <?php 
 
-require ('functions/databaseFunctions.php');
-startsession()
+require ('./functions/databaseFunctions.php');
+connectToDatabase();
+// startsession();
 
 
 
