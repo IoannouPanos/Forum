@@ -42,3 +42,5 @@ INSERT INTO users (username, email, password, role) VALUES
 ('anna_taylor', 'anna.taylor@example.com', 'taylorpass111', 'user'),
 ('admin_johnson', 'admin.johnson@example.com', 'adminpass999', 'admin'),
 ('admin_clark', 'admin.clark@example.com', 'adminsecure888', 'admin');
+
+ALTER TABLE users ADD COLUMN is_admin TINYINT(1) NOT NULL DEFAULT 0;
