@@ -7,21 +7,29 @@ if (isset($_POST["register"])) {
     $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Ασφαλής κωδικοποίηση
 
     // Έλεγχος αν το email ή το username υπάρχει ήδη
-    $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
-    $stmt->execute([$username, $email]);
-    
-    if ($stmt->rowCount() > 0) {
+    $stmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
+    $stmt->bind_param("ss", $username, $email);
+    $stmt->execute();
+    $stmt->store_result(); // Χρειαζόμαστε αυτό για να χρησιμοποιήσουμε num_rows
+
+    if ($stmt->num_rows > 0) {
         echo "<script>alert('Το username ή το email χρησιμοποιείται ήδη.');</script>";
     } else {
         // Εισαγωγή στη βάση
-        $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-        if ($stmt->execute([$username, $email, $password])) {
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $username, $email, $password);
+
+        if ($stmt->execute()) {
             echo "<script>alert('Η εγγραφή ολοκληρώθηκε!'); window.location='login.php';</script>";
         } else {
             echo "<script>alert('Σφάλμα εγγραφής.');</script>";
         }
     }
+
+    $stmt->close(); // Κλείσιμο του statement
 }
+
+$conn->close(); // Κλείσιμο της σύνδεσης
 ?>
 <!DOCTYPE html>
 <html lang="el">

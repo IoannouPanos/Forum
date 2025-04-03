@@ -4,10 +4,15 @@ $dbname = "forum_db";
 $username = "root";
 $password = ""; // Αν χρησιμοποιείς XAMPP, αφήνεις κενό
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Σφάλμα σύνδεσης: " . $e->getMessage());
+// Δημιουργία σύνδεσης με MySQLi
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Έλεγχος σύνδεσης
+if ($conn->connect_error) {
+    die("Σφάλμα σύνδεσης: " . $conn->connect_error);
 }
+
+// Ορισμός character set σε utf8 για σωστή υποστήριξη ελληνικών χαρακτήρων
+$conn->set_charset("utf8");
+
 ?>
