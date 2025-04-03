@@ -4,6 +4,7 @@ session_start();
 
 if (isset($_SESSION["user_id"])): ?>
     <a href="profile.php" class="btn btn-secondary">Προφίλ</a>
+    <a href="logout.php" class="btn btn-danger">Αποσύνδεση</a>
 <?php endif; ?>
 
 <!DOCTYPE html>
