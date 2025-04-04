@@ -1,7 +1,7 @@
 <?php 
-
+session_start();
 include "db.php"; 
-session_start(); 
+ 
 
 if (isset($_POST["login"])) {
     $email = trim($_POST["email"]);
