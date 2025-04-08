@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-nav a, .top-nav span {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.btn {
+    padding: 6px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.new-thread form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.new-thread input, .new-thread textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.new-thread button {
+    padding: 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.new-thread button:hover {
+    background-color: #0b7dda;
+}
+
+.thread {
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.thread .meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+}

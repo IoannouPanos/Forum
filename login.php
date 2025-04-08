@@ -20,7 +20,7 @@ if (isset($_POST["login"])) {
             $_SESSION["username"] = $user["username"];
             $_SESSION["role"] = $user["role"];
 
-            header("Location: index.php");
+            header("Location: 2index.php");
             exit;
         } else {
             echo "<script>alert('Λάθος στοιχεία σύνδεσης');</script>";

@@ -4,7 +4,7 @@ include "db.php";
 
 // Αν δεν υπάρχει ID thread, επιστροφή στην αρχική σελίδα
 if (!isset($_GET["id"])) {
-    header("Location: index.php");
+    header("Location: 1index.php");
     exit;
 }
 
