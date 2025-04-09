@@ -1,68 +1,56 @@
 <?php
 session_start();
-include "db.php";
+require_once 'db.php';
 
-// Αν ο χρήστης δεν είναι συνδεδεμένος, τον στέλνουμε στη σελίδα login
-if (!isset($_SESSION["user_id"])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
-    exit;
+    exit();
 }
 
-// Αν υποβλήθηκε η φόρμα
-if (isset($_POST["create"])) {
-    $user_id = $_SESSION["user_id"];
-    $title = trim($_POST["title"]);
-    $content = trim($_POST["content"]);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = trim($_POST['title']);
+    $content = trim($_POST['content']);
+    $user_id = $_SESSION['user_id'];
 
-    if (empty($title) || empty($content)) {
-        echo "<script>alert('Ο τίτλος και το περιεχόμενο είναι υποχρεωτικά!');</script>";
-    } else {
-        $query = "INSERT INTO threads (user_id, title, content) VALUES (?, ?, ?)";
-        $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "iss", $user_id, $title, $content);
-
-        if (mysqli_stmt_execute($stmt)) {
-            echo "<script>alert('Η συζήτηση δημιουργήθηκε!'); window.location='pppindex.php';</script>";
-        } else {
-            echo "<script>alert('Σφάλμα κατά τη δημιουργία.');</script>";
-        }
+    if (!empty($title) && !empty($content)) {
+        $stmt = $conn->prepare("INSERT INTO threads (user_id, title, content) VALUES (?, ?, ?)");
+        $stmt->bind_param("iss", $user_id, $title, $content);
+        $stmt->execute();
+        $stmt->close();
+        header("Location: forum.php");
+        exit();
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Νέα Aνάρτηση</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- Ενσωμάτωση TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '#content',
-            height: 300,
-            menubar: false,
-            plugins: 'lists link image code',
-            toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | code'
-        });
-    </script>
+    <title>Δημιουργία Ανάρτησης</title>
+    <link rel="stylesheet" href="css/styleCreate_Thread.css">
 </head>
-<body>
-    <div class="container mt-5">
-        <h2>Δημιουργία Νέας Ανάρτησης</h2>
-        <form action="create_thread.php" method="POST">
-            <div class="mb-3">
-                <label class="form-label">Τίτλος </label>
-                <input type="text" name="title" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Περιεχόμενο</label>
-                <textarea id="content" name="content" class="form-control" required></textarea>
-            </div>
-            <button type="submit" name="create" class="btn btn-success">Δημιουργία</button>
-            <a href="index.php" class="btn btn-secondary">Ακύρωση</a>
+
+<header>
+        <h1>Δημιουργήστε νέα ανάρτηση</h1>
+        <nav class="top-nav">
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <span>👋 Καλωσήρθες, <?= htmlspecialchars($_SESSION['username']) ?></span>
+                <a href="logout.php" class="btn">Αποσύνδεση</a>
+            <?php else: ?>
+                <a href="login.php" class="btn">Σύνδεση</a>
+                <a href="register.php" class="btn">Εγγραφή</a>
+            <?php endif; ?>
+        </nav>
+    </header>
+
+<body class="create-thread-page">
+    <div class="create-thread-container">
+        <h1>📝 Δημιουργία Νέας Ανάρτησης</h1>
+        <form method="post">
+            <input type="text" name="title" placeholder="Τίτλος" required>
+            <textarea name="content" placeholder="Περιεχόμενο..." required></textarea>
+            <button type="submit">Ανάρτηση</button>
+            <a href="forum.php" class="btn cancel">⬅ Επιστροφή</a>
         </form>
     </div>
 </body>

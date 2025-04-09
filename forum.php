@@ -1,64 +1,58 @@
-<?php 
-include "db.php";
+<?php
 session_start();
+require_once 'db.php';
 
-if (isset($_SESSION["user_id"])): ?>
-    <a href="profile.php" class="btn btn-secondary">Προφίλ</a>
-    <a href="logout.php" class="btn btn-danger">Αποσύνδεση</a>
-<?php endif; ?>
-
+// Φόρτωση threads
+$threads = [];
+$result = $conn->query("SELECT threads.*, users.username FROM threads JOIN users ON threads.user_id = users.id ORDER BY created_at DESC");
+while ($row = $result->fetch_assoc()) {
+    $threads[] = $row;
+}
+?>
 <!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Forum Αρχική</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Forum Συζητήσεων</h2>
+    <header>
+        <h1>Καλώς ήρθατε στο Forum</h1>
+        <nav class="top-nav">
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <span>👋 Καλωσήρθες, <?= htmlspecialchars($_SESSION['username']) ?></span>
+                <a href="logout.php" class="btn">Αποσύνδεση</a>
+            <?php else: ?>
+                <a href="login.php" class="btn">Σύνδεση</a>
+                <a href="register.php" class="btn">Εγγραφή</a>
+            <?php endif; ?>
+        </nav>
+    </header>
 
-        <?php if (isset($_SESSION["user_id"])): ?>
-            <a href="create_thread.php" class="btn btn-primary mb-3">+ Νέα Συζήτηση</a>
+    <main>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <div class="create-button-container">
+                <a href="create_thread.php" class="btn primary">➕ Δημιουργία νέας ανάρτησης</a>
+            </div>
+        <?php else: ?>
+            <p>Για να δημιουργήσεις ανάρτηση, <a href="login.php">συνδέσου εδώ</a>.</p>
         <?php endif; ?>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Τίτλος</th>
-                    <th>Δημιουργήθηκε από</th>
-                    <th>Ημερομηνία</th>
-                    <?php if (isset($_SESSION["is_admin"]) && $_SESSION["is_admin"] == 1): ?>
-                        <th>Ενέργειες</th>
-                    <?php endif; ?>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $query = "SELECT threads.id, threads.title, threads.created_at, users.username 
-                          FROM threads 
-                          JOIN users ON threads.user_id = users.id 
-                          ORDER BY threads.created_at DESC";
-                $result = mysqli_query($conn, $query);
-
-                while ($thread = mysqli_fetch_assoc($result)): ?>
-                    <tr>
-                        <td><a href="thread.php?id=<?php echo $thread['id']; ?>"><?php echo htmlspecialchars($thread['title']); ?></a></td>
-                        <td><?php echo htmlspecialchars($thread['username']); ?></td>
-                        <td><?php echo $thread['created_at']; ?></td>
-                        <?php if (isset($_SESSION["is_admin"]) && $_SESSION["is_admin"] == 1): ?>
-                            <td>
-                                <a href="delete_thread.php?id=<?php echo $thread['id']; ?>" class="btn btn-danger btn-sm" 
-                                   onclick="return confirm('Είσαι σίγουρος ότι θέλεις να διαγράψεις αυτή τη συζήτηση;');">
-                                    Διαγραφή
-                                </a>
-                            </td>
-                        <?php endif; ?>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
+        <section class="threads">
+            <h2>Αναρτήσεις</h2>
+            <?php if (empty($threads)): ?>
+                <p>Δεν υπάρχουν αναρτήσεις ακόμα.</p>
+            <?php else: ?>
+                <?php foreach ($threads as $thread): ?>
+                    <article class="thread">
+                        <h3><?= htmlspecialchars($thread['title']) ?></h3>
+                        <p><?= nl2br(htmlspecialchars($thread['content'])) ?></p>
+                        <div class="meta">Αναρτήθηκε από <?= htmlspecialchars($thread['username']) ?> στις <?= $thread['created_at'] ?></div>
+                    </article>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </section>
+    </main>
 </body>
 </html>

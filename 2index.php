@@ -30,7 +30,7 @@ while ($row = $result->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <title>Forum Αρχική</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/styleIndex.css">
 </head>
 <body>
     <header>
@@ -47,18 +47,13 @@ while ($row = $result->fetch_assoc()) {
     </header>
 
     <main>
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <section class="new-thread">
-                <h2>Δημιουργία νέας ανάρτησης</h2>
-                <form method="post">
-                    <input type="text" name="title" placeholder="Τίτλος" required>
-                    <textarea name="content" placeholder="Περιεχόμενο" required></textarea>
-                    <button type="submit">Ανάρτηση</button>
-                </form>
-            </section>
-        <?php else: ?>
-            <p>Για να δημιουργήσεις ανάρτηση, <a href="login.php">συνδέσου εδώ</a>.</p>
-        <?php endif; ?>
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <div class="create-thread-link">
+            <a href="create_thread.php" class="btn big">✍️ Δημιουργία νέας ανάρτησης</a>
+        </div>
+<?php else: ?>
+    <p>Για να δημιουργήσεις ανάρτηση, <a href="login.php">συνδέσου εδώ</a>.</p>
+<?php endif; ?>
 
         <section class="threads">
             <h2>Αναρτήσεις</h2>

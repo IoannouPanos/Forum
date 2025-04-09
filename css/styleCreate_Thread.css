@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-nav a, .top-nav span {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+.btn {
+    padding: 6px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+
+
+.create-thread-page {
+    background: linear-gradient(to right, #ece9e6, #ffffff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.create-thread-container {
+    max-width: 600px;
+    margin: 5rem auto;
+    background-color: white;
+    padding: 2rem 3rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.create-thread-container h1 {
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.create-thread-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.create-thread-container input,
+.create-thread-container textarea {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+}
+
+.create-thread-container button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-thread-container button:hover {
+    background-color: #45a049;
+}
+
+.btn.cancel {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #aaa;
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+.btn.cancel:hover {
+    background-color: #888;
+}
+
+.btn.big {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+}
