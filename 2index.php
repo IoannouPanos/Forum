@@ -51,9 +51,19 @@ while ($row = $result->fetch_assoc()) {
         <div class="create-thread-link">
             <a href="create_thread.php" class="btn big">✍️ Δημιουργία νέας ανάρτησης</a>
         </div>
+
+
 <?php else: ?>
-    <p>Για να δημιουργήσεις ανάρτηση, <a href="login.php">συνδέσου εδώ</a>.</p>
-<?php endif; ?>
+    <p>Για να δημιουργήσεις ανάρτηση, πρέπει να έχεις λογαριασμό</p>
+    <p>
+        Αν έχεις λογαριασμό μπορείς να συνδεθείς
+        <a href="login.php" class="btn">Σύνδεση</a>.
+    </p>
+    <p>
+        Για να δημιουργήσεις λογαριασμό
+        <a href="register.php" class="btn">Εγγραφή</a>.
+    </p>
+<?php endif; ?>   
 
         <section class="threads">
             <h2>Αναρτήσεις</h2>
