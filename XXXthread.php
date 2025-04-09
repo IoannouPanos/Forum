@@ -4,17 +4,18 @@ include "db.php";
 
 // Αν δεν υπάρχει ID thread, επιστροφή στην αρχική σελίδα
 if (!isset($_GET["id"])) {
-    header("Location: 1index.php");
+    header("Location: 2index.php");
     exit;
 }
 
 $thread_id = intval($_GET["id"]);
 
 // Φέρνουμε το thread
-$query = "SELECT threads.title, users.username 
+$query = "SELECT threads.title, threads.content, users.username 
           FROM threads 
           JOIN users ON threads.user_id = users.id 
           WHERE threads.id = ?";
+
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($stmt, "i", $thread_id);
 mysqli_stmt_execute($stmt);
@@ -23,7 +24,7 @@ $thread = mysqli_fetch_assoc($result);
 
 // Αν το thread δεν υπάρχει, επιστροφή στην αρχική
 if (!$thread) {
-    header("Location: index.php");
+    header("Location: 2index.php");
     exit;
 }
 
@@ -73,6 +74,10 @@ $posts = mysqli_stmt_get_result($stmt);
         <h2><?php echo htmlspecialchars($thread["title"]); ?></h2>
         <p><strong>Δημιουργήθηκε από:</strong> <?php echo htmlspecialchars($thread["username"]); ?></p>
         <hr>
+        <div class="mb-4 p-3 bg-light border rounded">
+            <?php echo $thread["content"]; // Προσοχή: ΔΕΝ χρησιμοποιούμε htmlspecialchars γιατί είναι ήδη HTML ?>
+        </div>
+
 
         <h4>Απαντήσεις:</h4>
         <?php while ($post = mysqli_fetch_assoc($posts)): ?>

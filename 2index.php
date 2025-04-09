@@ -57,11 +57,11 @@ while ($row = $result->fetch_assoc()) {
     <p>Για να δημιουργήσεις ανάρτηση, πρέπει να έχεις λογαριασμό</p>
     <p>
         Αν έχεις λογαριασμό μπορείς να συνδεθείς
-        <a href="login.php" class="btn">Σύνδεση</a>.
+        <a href="login.php" class="btn">Σύνδεση</a>
     </p>
     <p>
         Για να δημιουργήσεις λογαριασμό
-        <a href="register.php" class="btn">Εγγραφή</a>.
+        <a href="register.php" class="btn">Εγγραφή</a>
     </p>
 <?php endif; ?>   
 

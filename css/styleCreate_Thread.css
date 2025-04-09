@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     margin: 0;
     background-color: #f4f4f4;
 }
@@ -29,9 +29,6 @@ header {
 .btn:hover {
     background-color: #45a049;
 }
-
-
-
 .create-thread-page {
     background: linear-gradient(to right, #ece9e6, #ffffff);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
