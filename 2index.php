@@ -83,7 +83,7 @@ while ($row = $result->fetch_assoc()) {
                 <?php foreach ($threads as $thread): ?>
                     <article class="thread">
                         <h3>
-                            <a href="XXXthread.php?id=<?= $thread['id'] ?>">
+                            <a href="thread.php?id=<?= $thread['id'] ?>">
                                 <?= htmlspecialchars($thread['title']) ?>
                             </a>
                         </h3>
