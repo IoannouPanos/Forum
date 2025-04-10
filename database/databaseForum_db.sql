@@ -44,7 +44,7 @@ INSERT INTO users (username, email, password, role) VALUES
 ('admin_johnson', 'admin.johnson@example.com', 'adminpass999', 'admin'),
 ('admin_clark', 'admin.clark@example.com', 'adminsecure888', 'admin');
 
-ALTER TABLE users ADD COLUMN is_admin TINYINT(1) NOT NULL DEFAULT 0;
+
 
 ALTER TABLE threads MODIFY COLUMN content TEXT AFTER title;
 

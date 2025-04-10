@@ -48,9 +48,19 @@ if (isset($_POST["reply"])) {
         }
     }
 }
+// Έλεγχος αν ο χρήστης είναι admin και θέλει να διαγράψει post
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post_id']) && isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+    $delete_post_id = intval($_POST['delete_post_id']);
+    $stmt = $conn->prepare("DELETE FROM posts WHERE id = ?");
+    $stmt->bind_param("i", $delete_post_id);
+    $stmt->execute();
+    $stmt->close();
+    header("Location: thread.php?id=" . $thread_id);
+    exit();
+}
 
 // Φέρνουμε όλα τα posts του thread
-$query = "SELECT posts.content, posts.created_at, users.username 
+$query = "SELECT posts.id, posts.content, posts.created_at, users.username 
           FROM posts 
           JOIN users ON posts.user_id = users.id 
           WHERE posts.thread_id = ? 
@@ -88,7 +98,7 @@ $posts = mysqli_stmt_get_result($stmt);
         <p><strong>Δημιουργήθηκε από:</strong> <?php echo htmlspecialchars($thread["username"]); ?></p>
         <hr>
         <div class="mb-4 p-3 bg-light border rounded">
-            <?php echo $thread["content"]; // Προσοχή: ΔΕΝ χρησιμοποιούμε htmlspecialchars γιατί είναι ήδη HTML ?>
+            <?php echo $thread["content"];?>
         </div>
 
 
@@ -97,6 +107,12 @@ $posts = mysqli_stmt_get_result($stmt);
             <div class="border p-3 mb-3">
                 <p><strong><?php echo htmlspecialchars($post["username"]); ?></strong> - <?php echo $post["created_at"]; ?></p>
                 <p><?php echo nl2br(htmlspecialchars($post["content"])); ?></p>
+                <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'admin'): ?>
+                    <form action="thread.php?id=<?php echo $thread_id; ?>" method="POST" style="display:inline;">
+                        <input type="hidden" name="delete_post_id" value="<?php echo $post['id']; ?>">
+                        <button type="submit" class="btn btn-danger btn-sm">Διαγραφή</button>
+                    </form>
+                <?php endif; ?>
             </div>
         <?php endwhile; ?>
 
