@@ -18,6 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_thread_id']) && isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+    $delete_thread_id = intval($_POST['delete_thread_id']);
+    $stmt = $conn->prepare("DELETE FROM threads WHERE id = ?");
+    $stmt->bind_param("i", $delete_thread_id);
+    $stmt->execute();
+    $stmt->close();
+    header("Location: 2index.php");
+    exit();
+}
+
 // Φόρτωση threads
 $threads = [];
 $result = $conn->query("SELECT threads.*, users.username FROM threads JOIN users ON threads.user_id = users.id ORDER BY created_at DESC");
@@ -72,9 +82,20 @@ while ($row = $result->fetch_assoc()) {
             <?php else: ?>
                 <?php foreach ($threads as $thread): ?>
                     <article class="thread">
-                        <h3><?= htmlspecialchars($thread['title']) ?></h3>
+                        <h3>
+                            <a href="XXXthread.php?id=<?= $thread['id'] ?>">
+                                <?= htmlspecialchars($thread['title']) ?>
+                            </a>
+                        </h3>
                         <p><?= nl2br(htmlspecialchars($thread['content'])) ?></p>
                         <div class="meta">Αναρτήθηκε από <?= htmlspecialchars($thread['username']) ?> στις <?= $thread['created_at'] ?></div>
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                            <!-- Κουμπί διαγραφής -->
+                            <form action="2index.php" method="POST" style="display:inline;">
+                                <input type="hidden" name="delete_thread_id" value="<?= $thread['id'] ?>">
+                                <button type="submit" class="btn btn-danger btn-sm">Διαγραφή</button>
+                            </form>
+                        <?php endif; ?>
                     </article>
                 <?php endforeach; ?>
             <?php endif; ?>
