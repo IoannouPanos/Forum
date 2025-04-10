@@ -4,7 +4,7 @@ include "db.php";
 
 // Αν δεν υπάρχει ID thread, επιστροφή στην αρχική σελίδα
 if (!isset($_GET["id"])) {
-    header("Location: 2index.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -24,7 +24,7 @@ $thread = mysqli_fetch_assoc($result);
 
 // Αν το thread δεν υπάρχει, επιστροφή στην αρχική
 if (!$thread) {
-    header("Location: 2index.php");
+    header("Location: index.php");
     exit;
 }
 
