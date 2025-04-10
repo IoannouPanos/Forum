@@ -68,7 +68,20 @@ $posts = mysqli_stmt_get_result($stmt);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($thread["title"]); ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styleIndex.css">
 </head>
+<header>
+        <h1>Forum</h1>
+        <nav class="top-nav">
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <span>👋 Καλωσήρθες, <?= htmlspecialchars($_SESSION['username']) ?></span>
+                <a href="logout.php" class="btn">Αποσύνδεση</a>
+            <?php else: ?>
+                <a href="login.php" class="btn">Σύνδεση</a>
+                <a href="register.php" class="btn">Εγγραφή</a>
+            <?php endif; ?>
+        </nav>
+</header>
 <body>
     <div class="container mt-5">
         <h2><?php echo htmlspecialchars($thread["title"]); ?></h2>
