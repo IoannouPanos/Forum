@@ -62,6 +62,12 @@ while ($row = $result->fetch_assoc()) {
             <a href="create_thread.php" class="btn big">✍️ Δημιουργία νέας ανάρτησης</a>
         </div>
 
+<!-- μετάβαση στο create_user.php ορατό μόνο για admin -->
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+            <div class="admin-actions">
+                <a href="create_user.php" class="btn btn-success">Δημιουργία Νέου Χρήστη</a>
+            </div>
+        <?php endif; ?>
 
 <?php else: ?>
     <p>Για να δημιουργήσεις ανάρτηση, πρέπει να έχεις λογαριασμό</p>
