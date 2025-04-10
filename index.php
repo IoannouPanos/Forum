@@ -61,6 +61,7 @@ while ($row = $result->fetch_assoc()) {
         <div class="create-thread-link">
             <a href="create_thread.php" class="btn big">✍️ Δημιουργία νέας ανάρτησης</a>
         </div>
+        <br>
 
 <!-- μετάβαση στο create_user.php ορατό μόνο για admin -->
         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
