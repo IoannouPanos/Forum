@@ -117,7 +117,7 @@ $posts = mysqli_stmt_get_result($stmt);
         <?php endwhile; ?>
 
         <?php if (isset($_SESSION["user_id"])): ?>
-            <h4>Απάντηση:</h4>
+            <!-- <h4>Απάντηση:</h4> -->
             <form action="thread.php?id=<?php echo $thread_id; ?>" method="POST">
                 <div class="mb-3">
                     <textarea name="content" class="form-control" required></textarea>

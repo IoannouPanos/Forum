@@ -98,8 +98,8 @@ while ($row = $result->fetch_assoc()) {
                         <div class="meta">Αναρτήθηκε από <?= htmlspecialchars($thread['username']) ?> στις <?= $thread['created_at'] ?></div>
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                             <!-- Κουμπί διαγραφής -->
-                            <form action="2index.php" method="POST" style="display:inline;">
-                                <input type="hidden" name="delete_thread_id" value="<?= $thread['id'] ?>">
+                            <form action="delete_thread.php" method="GET" style="display:inline;">
+                                <input type="hidden" name="id" value="<?= $thread['id'] ?>">
                                 <button type="submit" class="btn btn-danger btn-sm">Διαγραφή</button>
                             </form>
                         <?php endif; ?>
