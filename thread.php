@@ -81,7 +81,7 @@ $posts = mysqli_stmt_get_result($stmt);
     <link rel="stylesheet" href="css/styleIndex.css">
 </head>
 <header>
-        <h1>Forum</h1>
+        <h1><a href="index.php">Forum</h1>
         <nav class="top-nav">
             <?php if (isset($_SESSION['user_id'])): ?>
                 <span>👋 Καλωσήρθες, <?= htmlspecialchars($_SESSION['username']) ?></span>

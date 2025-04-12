@@ -38,6 +38,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Δημιουργία Ανάρτησης</title>
     <link rel="stylesheet" href="css/styleCreate_Thread.css">
+    <!-- <style>
+        /* Προσθήκη λίγου styling για το textarea */
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+        }
+    </style> -->
 </head>
 
 <header>
