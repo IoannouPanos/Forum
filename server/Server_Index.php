@@ -1,6 +1,6 @@
 <?php
 session_start(); // 1. Έναρξη session
-require_once 'functions.php'; // 2. Συμπερίληψη του αρχείου functions.php
+require_once 'functions/functions_index.php'; // 2. Συμπερίληψη του αρχείου functions_index.php
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) { // 3. Έλεγχος αν η μέθοδος είναι POST και αν ο χρήστης είναι συνδεδεμένος
     $title = trim($_POST['title']); // 4. Ανάκτηση και καθαρισμός του τίτλου
