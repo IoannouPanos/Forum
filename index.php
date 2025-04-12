@@ -94,7 +94,7 @@ while ($row = $result->fetch_assoc()) {
                                 <?= htmlspecialchars($thread['title']) ?>
                             </a>
                         </h3>
-                        <p><?= nl2br(htmlspecialchars($thread['content'])) ?></p>
+                        <p class="textrow"><?= nl2br(htmlspecialchars($thread['content'])) ?></p>
                         <div class="meta">Αναρτήθηκε από <?= htmlspecialchars($thread['username']) ?> στις <?= $thread['created_at'] ?></div>
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                             <!-- Κουμπί διαγραφής -->

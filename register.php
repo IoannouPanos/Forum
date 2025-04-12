@@ -20,7 +20,7 @@ if (isset($_POST["register"])) {
         $stmt->bind_param("sss", $username, $email, $password);
 
         if ($stmt->execute()) {
-            echo "<script>alert('Η εγγραφή ολοκληρώθηκε!'); window.location='login.php';</script>";
+            echo "<script>alert('Η εγγραφή ολοκληρώθηκε!'); window.location='index.php';</script>";
         } else {
             echo "<script>alert('Σφάλμα εγγραφής.');</script>";
         }
