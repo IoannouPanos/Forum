@@ -96,7 +96,7 @@ while ($row = $result->fetch_assoc()) {
                         </h3>
                         <p class="textrow"><?= nl2br(htmlspecialchars($thread['content'])) ?></p>
                         <div class="meta">Αναρτήθηκε από <?= htmlspecialchars($thread['username']) ?> στις <?= $thread['created_at'] ?></div>
-                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?><br>
                             <!-- Κουμπί διαγραφής -->
                             <form action="delete_thread.php" method="GET" style="display:inline;">
                                 <input type="hidden" name="id" value="<?= $thread['id'] ?>">
