@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'functions_index.php';
+require_once 'functions/functions_index.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
     $title = trim($_POST['title']);
