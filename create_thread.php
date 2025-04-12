@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title']);
-    $content = strip_tags(trim($_POST['content'])); // Αφαίρεση HTML tags
+    $content = trim($_POST['content']); // Αποθήκευση περιεχομένου με HTML tags
     $user_id = $_SESSION['user_id'];
 
     if (!empty($title) && !empty($content)) {
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param("iss", $user_id, $title, $content);
             if ($stmt->execute()) {
                 echo "<script>alert('Η ανάρτηση δημιουργήθηκε επιτυχώς!');</script>";
-                header("Location: forum.php");
+                header("Location: index.php");
                 exit();
             } else {
                 echo "<script>alert('Σφάλμα κατά την εκτέλεση του ερωτήματος.');</script>";
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Δημιουργία Ανάρτησης</title>
-    <!-- <link rel="stylesheet" href="css/styleCreate_Thread.css"> -->
+    <link rel="stylesheet" href="css/styleCreate_Thread.css">
 </head>
 
 <header>
@@ -67,10 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.tiny.cloud/1/twr5mw7tdxjss1tctchgtrokgizwl0yzopliqdilnsnerke1/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-            selector: 'textarea',
+            selector: 'textarea', // Επιλέγει όλα τα <textarea>
             plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            toolbar_mode: 'floating',
+            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+            language: 'el', // Ορισμός της γλώσσας στα ελληνικά
+            content_style: "body { font-family:Arial,Helvetica,sans-serif; font-size:14px }",
             forced_root_block: false, // Απενεργοποίηση αυτόματης προσθήκης <p>
+            entity_encoding: "raw" // Εμφάνιση ελληνικών χαρακτήρων κανονικά
         });
     </script>
 </body>
