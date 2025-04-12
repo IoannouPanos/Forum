@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title']);
-    $content = trim($_POST['content']); // Αποθήκευση περιεχομένου με HTML tags
+    $content =strip_tags(trim($_POST['content'])); // Αφαίρεση HTML tags
     $user_id = $_SESSION['user_id'];
 
     if (!empty($title) && !empty($content)) {
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" name="title" placeholder="Τίτλος" required>
             <textarea id="content" name="content" placeholder="Περιεχόμενο..." required></textarea>
             <button type="submit">Ανάρτηση</button>
-            <a href="forum.php" class="btn cancel">⬅ Επιστροφή</a>
+            <a href="index.php" class="btn cancel">⬅ Επιστροφή</a>
         </form>
     </div>
 
