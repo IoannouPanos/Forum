@@ -1,4 +1,4 @@
-<?php require_once 'server/thread_Index.php'; ?>
+<?php require_once 'server/Server_Index.php'; ?>
 <!DOCTYPE html>
 <html lang="el">
 <head>
