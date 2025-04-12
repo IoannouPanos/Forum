@@ -38,17 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Δημιουργία Ανάρτησης</title>
     <link rel="stylesheet" href="css/styleCreate_Thread.css">
-    <!-- <style>
-        /* Προσθήκη λίγου styling για το textarea */
-        textarea {
-            width: 100%;
-            height: 200px;
-            padding: 10px;
-            font-size: 16px;
-            font-family: Arial, sans-serif;
-            resize: vertical;
-        }
-    </style> -->
 </head>
 
 <header>
@@ -69,13 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1>📝 Δημιουργία Νέας Ανάρτησης</h1>
         <form method="post" action="create_thread.php">
             <input type="text" name="title" placeholder="Τίτλος" required>
-            <textarea id="content" name="content" placeholder="Περιεχόμενο..." required></textarea>
+            <textarea id="content" name="content" placeholder="Περιεχόμενο..." style="display: inherit !important;"></textarea>
             <button type="submit">Ανάρτηση</button>
             <a href="index.php" class="btn cancel">⬅ Επιστροφή</a>
         </form>
     </div>
-
-    <script src="https://cdn.tiny.cloud/1/twr5mw7tdxjss1tctchgtrokgizwl0yzopliqdilnsnerke1/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+      <script src="https://cdn.tiny.cloud/1/twr5mw7tdxjss1tctchgtrokgizwl0yzopliqdilnsnerke1/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
             selector: 'textarea', // Επιλέγει όλα τα <textarea>
