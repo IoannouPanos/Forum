@@ -58,7 +58,7 @@ require_once 'server/Server_Index.php';
                                 <?= htmlspecialchars($thread['title']) ?>
                             </a>
                         </h3>
-                        <p class="textrow"><?= nl2br(htmlspecialchars($thread['content'])) ?></p>
+                        <p class="content"><?= nl2br(htmlspecialchars(mb_strimwidth($thread['content'], 0, 150, '...'))) ?></p>
                         <div class="meta">Αναρτήθηκε από <?= htmlspecialchars($thread['username']) ?> στις <?= $thread['created_at'] ?></div>
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?><br>
                             <form action="delete_thread.php" method="GET" style="display:inline;">
