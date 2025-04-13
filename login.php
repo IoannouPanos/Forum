@@ -1,38 +1,5 @@
 <?php 
-session_start();
-require "db.php"; 
-
-if (isset($_POST["login"])) {
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"];
-
-    $stmt = $conn->prepare("SELECT id, username, role, password FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-
-        // Plain-text σύγκριση
-        if ($password === $user["password"]) {
-            $_SESSION["user_id"] = $user["id"];
-            $_SESSION["username"] = $user["username"];
-            $_SESSION["role"] = $user["role"];
-
-            header("Location: index.php");
-            exit;
-        } else {
-            echo "<script>alert('Λάθος στοιχεία σύνδεσης');</script>";
-        }
-    } else {
-        echo "<script>alert('Λάθος στοιχεία σύνδεσης');</script>";
-    }
-
-    $stmt->close();
-}
-
-$conn->close();
+require_once 'server/Server_login.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +11,8 @@ $conn->close();
     <link rel="stylesheet" href="css/styleIndex.css">
 </head>
 <header>
-        <h1>Καλώς ήρθατε στο Forum</h1>
-    </header>
+    <h1>Καλώς ήρθατε στο Forum</h1>
+</header>
 <body>
 <div class="container mt-5">
     <h2>Σύνδεση</h2>

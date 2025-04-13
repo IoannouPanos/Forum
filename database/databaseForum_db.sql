@@ -36,13 +36,7 @@ INSERT INTO users (username, email, password, role) VALUES
 ('john_doe', 'john.doe@example.com', 'password123', 'user'),
 ('jane_smith', 'jane.smith@example.com', 'securepass456', 'user'),
 ('michael_brown', 'michael.brown@example.com', 'mypassword789', 'user'),
-('emily_davis', 'emily.davis@example.com', 'emily2025', 'user'),
-('david_jones', 'david.jones@example.com', 'davidpass321', 'user'),
-('sarah_wilson', 'sarah.wilson@example.com', 'wilsonpass654', 'user'),
-('chris_moore', 'chris.moore@example.com', 'moorepass987', 'user'),
-('anna_taylor', 'anna.taylor@example.com', 'taylorpass111', 'user'),
-('admin_johnson', 'admin.johnson@example.com', 'adminpass999', 'admin'),
-('admin_clark', 'admin.clark@example.com', 'adminsecure888', 'admin');
+('admin_clark', 'admin.clark@example.com', 'admin88', 'admin');
 
 
 
