@@ -86,7 +86,4 @@ main {
     line-height: 1.5; /* Ρύθμιση ύψους γραμμής */
     max-height: 3rem; /* 2 γραμμές x ύψος γραμμής */
 }
-/* .textrow {
-    overflow: hidden;
-    white-space: nowrap;
-} */
+
