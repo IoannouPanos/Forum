@@ -33,10 +33,10 @@ CREATE TABLE posts (
 );
 
 INSERT INTO users (username, email, password, role) VALUES
-('john_doe', 'john.doe@example.com', 'password123', 'user'),
-('jane_smith', 'jane.smith@example.com', 'securepass456', 'user'),
-('michael_brown', 'michael.brown@example.com', 'mypassword789', 'user'),
-('admin_clark', 'admin.clark@example.com', 'admin88', 'admin');
+('john', 'john@example.com', '1234', 'user'),
+('jane_smith', 'jane@example.com', '9999', 'user'),
+('michael_brown', 'brown@example.com', 'pass', 'user'),
+('admin_clark', 'clark@example.com', 'admin', 'admin');
 
 
 
